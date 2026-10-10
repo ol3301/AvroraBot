@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{44DE50B1
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
-		preview.png = preview.png
+		preview.jpg = preview.jpg
 	EndProjectSection
 EndProject
 Global

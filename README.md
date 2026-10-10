@@ -1,4 +1,4 @@
-![Alt Text](preview.png)
+![Alt Text](preview.jpg)
 # AvroraBot
 
 ## Getting Started
