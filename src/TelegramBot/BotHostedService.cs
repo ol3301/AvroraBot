@@ -1,20 +1,20 @@
-using Application.ApplicationServices;
+using Application;
 using Application.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using TelegramBot.Bundle;
 using TelegramBot.Extensions;
 using TelegramBot.Routes;
-using TelegramBot.ServiceBundle;
 
 namespace TelegramBot;
 
 public class BotHostedService(
     IServiceScopeFactory serviceFactory,
     ILogger<IServiceScopeFactory> logger,
-    SignUpUserApplicationService signUpUserApplicationService,
+    RegistrationAppService registrationAppService,
     TelegramBotClient bot) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -47,11 +47,11 @@ public class BotHostedService(
         using var scope = serviceFactory.CreateScope();
         if (update.Message != null)
         {
-            await signUpUserApplicationService.SignUp(new SignUpUserCommand(
+            await registrationAppService.SignUp(new SignUpUserCommand(
                 UserId: update.Message.From.Id,
                 Username: update.Message.From.Username,
                 Fullname: update.Message.From.FirstName + " " + update.Message.From.LastName,
-                Plan: ServiceBundleConfig.FreeToolset)
+                Plan: BundleConfig.FreeToolset)
             );
         }
 

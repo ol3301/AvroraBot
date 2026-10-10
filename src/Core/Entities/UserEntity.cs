@@ -1,4 +1,4 @@
-using Core.Enums;
+using Core.Ai;
 
 namespace Core.Entities;
 
@@ -13,20 +13,6 @@ public class UserEntity
     public bool ContextMemory { get; set; }
     public string? ReferralId { get; set; }
     public UserConfig Config { get; set; }
-
-    public bool SetTextModel(TextModelEnum model)
-    {
-        var areSame = TextModelId == model;
-        TextModelId = model;
-        return !areSame;
-    }
-    
-    public bool SetImageModel(ImageModelEnum model)
-    {
-        var areSame = ImageModelId == model;
-        ImageModelId = model;
-        return !areSame;
-    }
 }
 
 public class UserConfig

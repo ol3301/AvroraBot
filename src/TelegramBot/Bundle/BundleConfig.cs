@@ -1,9 +1,9 @@
 using Core;
-using Core.Enums;
+using Core.Ai;
 
-namespace TelegramBot.ServiceBundle;
+namespace TelegramBot.Bundle;
 
-public static class ServiceBundleConfig
+public static class BundleConfig
 {
     public static ToolsetDefinition FreeToolset { get; } = new(
         TextModels: [TextModelEnum.Gpt56Luna],
@@ -14,7 +14,7 @@ public static class ServiceBundleConfig
             ImageRequestCountPerDay: null)
     );
     
-    public static IEnumerable<ServiceBundleDefinition> Bundles { get; } =
+    public static IEnumerable<BundleDefinition> Bundles { get; } =
     [
         new(
             Stars: 1,

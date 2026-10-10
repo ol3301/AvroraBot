@@ -1,14 +1,14 @@
 using Application.Commands;
 using Core.Abstractions;
+using Core.Ai;
 using Core.Entities;
-using Core.Enums;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace Application.ApplicationServices;
+namespace Application;
 
-public class SignUpUserApplicationService(IMongoDbContext context, ILogger<SignUpUserApplicationService> logger)
+public class RegistrationAppService(IMongoDbContext context, ILogger<RegistrationAppService> logger)
 {
     public async Task SignUp(SignUpUserCommand command)
     {
@@ -38,4 +38,5 @@ public class SignUpUserApplicationService(IMongoDbContext context, ILogger<SignU
         
         await context.Users.InsertOneAsync(entity);
     }
+
 }

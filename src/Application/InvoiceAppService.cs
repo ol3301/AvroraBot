@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace Application.ApplicationServices;
+namespace Application;
 
-public class StarPaymentApplicationService(IMongoDbContext context, 
-    ILogger<StarPaymentApplicationService> logger)
+public class InvoiceAppService(ILogger<InvoiceAppService> logger,
+    IMongoDbContext context)
 {
-    public async Task<Guid> CreateInvoice(CreateStartInvoiceCommand command)
+    public async Task<Guid> CreateStartInvoice(CreateStartInvoiceCommand command)
     {
         logger.LogInformation(command.ToString());
 

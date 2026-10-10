@@ -1,21 +1,21 @@
 using System.Text;
-using Application.ApplicationServices;
+using Application;
 using Application.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Payments;
-using TelegramBot.ServiceBundle;
+using TelegramBot.Bundle;
 
 namespace TelegramBot.Routes;
 
 public class PremiumRoute(TelegramBotClient bot, 
-    StarPaymentApplicationService starPaymentApplicationService)
+    InvoiceAppService invoiceAppService)
 {
     public async Task Handle(Message msg)
     {
         var sb = new StringBuilder();
         
-        foreach (var bundle in ServiceBundleConfig.Bundles)
+        foreach (var bundle in BundleConfig.Bundles)
         {
             var plan = bundle.ToolSet;
             sb.Append($"""
@@ -43,14 +43,14 @@ public class PremiumRoute(TelegramBotClient bot,
 
     public async Task HandleBundleSelection(CallbackQuery callbackQuery, BundleKind kind)
     {
-        var bundle = ServiceBundleConfig.Bundles.First(b => b.Kind == kind);
+        var bundle = BundleConfig.Bundles.First(b => b.Kind == kind);
 
         var command = new CreateStartInvoiceCommand(
             UserId: callbackQuery.From.Id,
             Stars: bundle.Stars,
             Toolset: bundle.ToolSet);
         
-        var invoiceId = await starPaymentApplicationService.CreateInvoice(command);
+        var invoiceId = await invoiceAppService.CreateStartInvoice(command);
 
         await bot.DeleteMessage(callbackQuery.Message.Chat.Id, callbackQuery.Message.MessageId);
         await bot.SendInvoice(callbackQuery.From.Id,
@@ -69,7 +69,7 @@ public class PremiumRoute(TelegramBotClient bot,
             InvoiceId: Guid.Parse(msg.SuccessfulPayment.InvoicePayload)
         );
 
-        await starPaymentApplicationService.SubmitInvoice(command);
+        await invoiceAppService.SubmitInvoice(command);
 
         await bot.SendRichMessage(msg.Chat.Id, new InputRichMessage
         {

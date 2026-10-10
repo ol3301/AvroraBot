@@ -1,4 +1,4 @@
-using Core.Enums;
+using Core.Ai;
 
 namespace Core.Entities;
 

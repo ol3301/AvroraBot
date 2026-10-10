@@ -1,5 +1,4 @@
 using Core.Ai;
-using Core.Enums;
 using Microsoft.Extensions.AI;
 
 namespace Core.Abstractions;

@@ -1,6 +1,5 @@
 using Core.Abstractions;
 using Core.Ai;
-using Core.Enums;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,8 +1,8 @@
 using Core;
 
-namespace TelegramBot.ServiceBundle;
+namespace TelegramBot.Bundle;
 
-public record ServiceBundleDefinition(
+public record BundleDefinition(
     int Stars,
     string Name,
     string Description,
