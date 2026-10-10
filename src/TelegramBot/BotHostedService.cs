@@ -87,11 +87,9 @@ public class BotHostedService(
                     .GetRequiredService<PremiumRoute>()
                     .HandleBundleSelection(callback, selection);
                 break;
-            
             case { CallbackQuery: { Data: { } data } callback } when data == "-":
                 await bot.AnswerCallbackQuery(callback.Id);
                 break;
-            
             default:
                 logger.LogCritical("Unhandled update type: {UpdateType}", update.Type);
                 break;
