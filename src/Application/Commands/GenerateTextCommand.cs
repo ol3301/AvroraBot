@@ -1,3 +1,4 @@
+using Core.Ai;
 using Core.Models;
 
 namespace Application.Commands;

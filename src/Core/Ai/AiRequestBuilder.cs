@@ -11,11 +11,11 @@ public class AiRequestBuilder(
     ImageAttachmentCoreService imageAttachmentService,
     IMongoDbContext context)
 {
-    public async Task<GenerateTextRequestModel> BuildTextRequest(UserEntity user,
+    public async Task<AiTextRequestModel> BuildTextRequest(UserEntity user,
         string text,
         string? imageId)
     {
-        var requestModel = new GenerateTextRequestModel
+        var requestModel = new AiTextRequestModel
         {
             Text = text,
         };

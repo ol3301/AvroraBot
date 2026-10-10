@@ -1,8 +1,9 @@
+using Core.Ai;
 using Microsoft.Extensions.AI;
 
 namespace Core.Models;
 
-public class GenerateTextRequestModel
+public class AiTextRequestModel
 {
     public required string Text { get; set; }
     public ImageAttachmentModel? ImageAttachment { get; set; }

@@ -70,7 +70,7 @@ public class AiOperationsCoreService(
         };
     }
 
-    public async Task<GenerateImageResponseModel> GenerateImage(UserEntity user, string prompt)
+    public async Task<AiNewImageResponseModel> NewImage(UserEntity user, string prompt)
     {
         if (user.Config.AvailableImageRequestCount < 1)
         {
@@ -92,7 +92,7 @@ public class AiOperationsCoreService(
 
         user.Config.AvailableImageRequestCount -= 1;
 
-        return new GenerateImageResponseModel(
+        return new AiNewImageResponseModel(
             InputTokenCount: response.Usage.InputTokenCount.Value,
             OutputTokenCount: response.Usage.OutputTokenCount.Value,
             DataLength: dataContent.Data.Length,
@@ -100,7 +100,7 @@ public class AiOperationsCoreService(
             Data: dataContent.Data);
     }
 
-    public async Task<EditImageResponseModel> EditImage(UserEntity user, ReadOnlyMemory<byte> data, string mediaType,
+    public async Task<AiEditedImageResponseModel> EditImage(UserEntity user, ReadOnlyMemory<byte> data, string mediaType,
         string prompt)
     {
         if (user.Config.AvailableImageRequestCount < 1)
@@ -122,8 +122,8 @@ public class AiOperationsCoreService(
         }
 
         user.Config.AvailableImageRequestCount -= 1;
-
-        return new EditImageResponseModel(
+        
+        return new AiEditedImageResponseModel(
             response.Usage.InputTokenCount.Value,
             response.Usage.OutputTokenCount.Value,
             dataContent.Data.Length,

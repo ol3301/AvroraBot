@@ -1,6 +1,6 @@
 namespace Core.Models;
 
-public record GenerateImageResponseModel(
+public record AiEditedImageResponseModel(
     long InputTokenCount,
     long OutputTokenCount,
     int DataLength,

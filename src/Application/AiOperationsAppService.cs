@@ -134,7 +134,7 @@ public class AiOperationsAppService(
                 "Сегодня вы исчерпали лимит на генерацию изображений. Пожалуйста, попробуйте завтра.");
         }
 
-        var response = await aiCoreService.GenerateImage(user, command.ImagePrompt);
+        var response = await aiCoreService.NewImage(user, command.ImagePrompt);
 
         await (await context.Client.StartSessionAsync()).WithTransactionAsync(async (session, _) =>
         {
