@@ -15,7 +15,7 @@ using TelegramBot.Utilities;
 namespace TelegramBot.Routes;
 
 public class MessageRoute(TelegramBotClient bot, 
-    AiOperationsAppService aiCoreService,
+    AiOperationsAppService aiOperationsAppService,
     ILogger<MessageRoute> logger)
 {
     public async Task Handle(Message message)
@@ -32,7 +32,7 @@ public class MessageRoute(TelegramBotClient bot,
             );
 
             GenerateTextCommandResult result = null!;
-            var stream = aiCoreService.GenerateTextStreaming(command);
+            var stream = aiOperationsAppService.GenerateTextStreaming(command);
             await foreach (var update in stream)
             {
                 result = update.Result;
@@ -74,7 +74,7 @@ public class MessageRoute(TelegramBotClient bot,
                 MessageId: message.MessageId
             );
             
-            var response = await aiCoreService.GenerateImage(command);
+            var response = await aiOperationsAppService.GenerateImage(command);
             using var ms = new MemoryStream(response.Image.ToArray());
             await bot.SendRichMessage(message.Chat.Id, new InputRichMessage
             {
@@ -109,7 +109,7 @@ public class MessageRoute(TelegramBotClient bot,
                 ImageAttachment: imageAttachment
             );
             
-            var response = await aiCoreService.EditImage(command);
+            var response = await aiOperationsAppService.EditImage(command);
             using var ms = new MemoryStream(response.Image.ToArray());
             await bot.SendRichMessage(message.Chat.Id, new InputRichMessage
             {

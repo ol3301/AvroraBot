@@ -33,11 +33,6 @@ builder.Services.AddOptions<AppConfig>()
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-builder.Services.AddSingleton<TelegramBotClient>(x =>
-    new TelegramBotClient(x.GetRequiredService<IOptions<AppConfig>>().Value.Telegram));
-builder.Services.AddSingleton<IMongoDbContext, MongoDbContext>(x =>
-    new MongoDbContext(new MongoClient(x.GetRequiredService<IOptions<AppConfig>>().Value.Mongo)));
-
 builder.Services.AddKeyedSingleton<ChatClientConfiguration>(TextModelEnum.Gpt56Luna, (x, _) =>
     new ChatClientConfiguration
     (
@@ -53,18 +48,25 @@ builder.Services.AddKeyedImageGenerator(ImageModelEnum.GptImage25Flare, x => new
         x.GetRequiredService<IOptions<AppConfig>>().Value.OpenAi)
     .AsIImageGenerator());
 
-builder.Services.AddSingleton<IModelProvider, ModelProvider>();
-
 builder.Services.AddTransient<MessageRoute>();
 builder.Services.AddTransient<StartRoute>();
 builder.Services.AddTransient<PremiumRoute>();
-builder.Services.AddTransient<IBotApi, TelegramBotApi>();
+
+builder.Services.AddSingleton<TelegramBotClient>(x =>
+    new TelegramBotClient(x.GetRequiredService<IOptions<AppConfig>>().Value.Telegram));
+builder.Services.AddSingleton<IMongoDbContext, MongoDbContext>(x =>
+    new MongoDbContext(new MongoClient(x.GetRequiredService<IOptions<AppConfig>>().Value.Mongo)));
+builder.Services.AddSingleton<IModelProvider, ModelProvider>();
+
 builder.Services.AddTransient<AiOperationsAppService>();
 builder.Services.AddTransient<RegistrationAppService>();
 builder.Services.AddTransient<InvoiceAppService>();
+
+builder.Services.AddTransient<IBotApi, TelegramBotApi>();
 builder.Services.AddTransient<AiOperationsCoreService>();
 builder.Services.AddTransient<ImageAttachmentCoreService>();
 builder.Services.AddTransient<AiRequestBuilder>();
+
 
 builder.Services.AddHostedService<BotHostedService>();
 builder.Build().Run();
