@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Separate multiple warning codes with a semicolon -->
+    <NoWarn>$(NoWarn);MEAI001</NoWarn>
+  </PropertyGroup>
+</Project>
