@@ -51,10 +51,10 @@ public class PremiumRoute(TelegramBotClient bot,
             Toolset: bundle.ToolSet);
         
         var invoiceId = await starPaymentApplicationService.CreateInvoice(command);
-        
+
         await bot.DeleteMessage(callbackQuery.Message.Chat.Id, callbackQuery.Message.MessageId);
-        await bot.SendInvoice(callbackQuery.From.Id, 
-            bundle.Name, 
+        await bot.SendInvoice(callbackQuery.From.Id,
+            bundle.Name,
             bundle.Description,
             invoiceId.ToString(),
             "XTR",
@@ -64,9 +64,11 @@ public class PremiumRoute(TelegramBotClient bot,
 
     public async Task HandlePayment(Message msg)
     {
-        var command = new SubmitStarInvoiceCommand(UserId: msg.From.Id,
-            InvoiceId: Guid.Parse(msg.SuccessfulPayment.InvoicePayload));
-        
+        var command = new SubmitStarInvoiceCommand(
+            UserId: msg.From.Id,
+            InvoiceId: Guid.Parse(msg.SuccessfulPayment.InvoicePayload)
+        );
+
         await starPaymentApplicationService.SubmitInvoice(command);
 
         await bot.SendRichMessage(msg.Chat.Id, new InputRichMessage
