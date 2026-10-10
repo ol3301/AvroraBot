@@ -81,19 +81,20 @@ public class BotHostedService(
                     .Handle(msg);
                 break;
             case { CallbackQuery: { Data: {} data  } callback } when data.StartsWith("bundle:"):
-            {
                 var selection = Enum.Parse<BundleKind>(callback.Data["bundle:".Length..]);
                         
                 await scope.ServiceProvider
                     .GetRequiredService<PremiumRoute>()
                     .HandleBundleSelection(callback, selection);
                 break;
-            }
+            
             case { CallbackQuery: { Data: { } data } callback } when data == "-":
-            {
                 await bot.AnswerCallbackQuery(callback.Id);
                 break;
-            }
+            
+            default:
+                logger.LogCritical("Unhandled update type: {UpdateType}", update.Type);
+                break;
         }
     }
 }
