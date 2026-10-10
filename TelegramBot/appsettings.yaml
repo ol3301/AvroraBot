@@ -1,5 +1,0 @@
-Telegram: ""
-Mongo: ""
-OpenAi: ""
-AllowedImages: [ ".png",".jpeg",".jpg",".webp",".gif"]
-MaxFileSize: 10485760
