@@ -50,11 +50,6 @@ public class AiOperationsCoreService(
 
         DomainLogging.LogTextResponse(logger, response);
 
-        if (user.TextModelId != TextModelEnum.Gpt56Luna)
-        {
-            user.Config.AvailableImageRequestCount -= 1;
-        }
-
         var tool = response.Messages.First().Contents.OfType<FunctionCallContent>().FirstOrDefault();
 
         var result = new GenerateTextResponseModel(
