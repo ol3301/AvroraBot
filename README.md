@@ -45,13 +45,19 @@ AvroraBot is a full-featured business solution:
 
 ## Architecture
 
-The solution follows Domain-Driven Design (DDD) principles and is split into four layers:
+The bot is a single .NET project (`src/AvroraBot`). Its folders are grouped by technical role:
 
-| Layer            | Role                                                                                      |
-|------------------|-------------------------------------------------------------------------------------------|
-| `TelegramBot`    | **Presentation layer**: receives Telegram updates, handles commands, messages and replies |
-| `Application`    | **Application layer**: use cases and orchestration of business operations                 |
-| `Core`           | Core domain and database model, persisted in MongoDB                                      |
-| `Infrastructure` | External integrations and implementations (MongoDB access, OpenAI, payments)             |
+| Folder          | Contents                                                                 |
+|-----------------|--------------------------------------------------------------------------|
+| `Routes`        | Telegram update handlers (`/start`, `/premium`, payments, messages)      |
+| `Services/Features` | Feature services: AI operations, users, invoices (never call each other) |
+| `Services/Shared` | Helpers used by features: image download, AI model provider            |
+| `Hosting`       | Background service that polls Telegram and dispatches updates            |
+| `Data`          | MongoDB context and query extension methods                              |
+| `Entities`      | MongoDB documents                                                        |
+| `Models`        | Commands, results and other DTOs                                         |
+| `Configuration` | App settings, AI client configuration, bundle definitions                |
+| `AiTools`       | Tool definitions exposed to the AI model                                 |
+| `Enums`, `Exceptions`, `Extensions`, `Utilities` | Shared helpers                          |
 
 Data is stored in **MongoDB** with **transaction support**, which guarantees integrity for operations such as payments and usage tracking.
