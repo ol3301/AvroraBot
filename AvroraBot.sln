@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{44DE50B1-EAD9-4915-A096-F23002DEF16C}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.gitignore = .gitignore
+		CLAUDE.md = CLAUDE.md
+		compose.yaml = compose.yaml
 		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 		preview.jpg = preview.jpg

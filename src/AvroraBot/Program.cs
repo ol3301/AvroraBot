@@ -53,7 +53,7 @@ builder.Services.AddSingleton<ModelProvider>();
 builder.Services.AddTransient<AiService>();
 builder.Services.AddTransient<UserService>();
 builder.Services.AddTransient<InvoiceService>();
-builder.Services.AddTransient<ImageDownloadService>();
+builder.Services.AddTransient<TelegramStorage>();
 
 builder.Services.AddHostedService<BotHostedService>();
 builder.Build().Run();
