@@ -1,3 +1,4 @@
+using AvroraBot.Shared;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;

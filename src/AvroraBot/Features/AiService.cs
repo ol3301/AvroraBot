@@ -1,3 +1,4 @@
+using AvroraBot.Shared;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

@@ -1,4 +1,5 @@
 using System.ClientModel;
+using AvroraBot.Shared;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Markup;

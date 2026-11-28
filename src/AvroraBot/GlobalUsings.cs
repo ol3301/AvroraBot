@@ -2,7 +2,6 @@ global using AvroraBot.Shared.AI;
 global using AvroraBot.Shared.Configuration;
 global using AvroraBot.Shared.DataStorage.Mongo;
 global using AvroraBot.Shared.Enums;
-global using AvroraBot.Shared.Exceptions;
 global using AvroraBot.Shared.Extensions;
 global using AvroraBot.Features;
 global using AvroraBot.Features.Commands;
